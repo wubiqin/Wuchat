@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.wbq.common.proto;
+
+option java_package = "com.wbq.common.proto";
+option java_outer_classname = "BaseRequest";
+
+message Request {
+    int64 id = 1;
+    string msg = 2;
+    int32 type = 3;
+}
+
