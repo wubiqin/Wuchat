@@ -3,7 +3,7 @@ package com.wbq.common.util;
 import com.google.common.base.Splitter;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.wbq.common.AppConfig;
+import com.wbq.common.config.AppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.stereotype.Component;

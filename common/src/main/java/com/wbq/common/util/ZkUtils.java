@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,22 +31,19 @@ public class ZkUtils {
         Assert.isTrue(!Strings.isNullOrEmpty(path), "path can't be null or empty");
         boolean exist = zkClient.exists(path);
         if (exist) {
-            log.info("根节点已存在 path={}", path);
+            log.info("节点已存在 path={}", path);
             return;
         }
-        log.info("创建根节点 path={}", path);
+        log.info("创建节点 path={}", path);
         zkClient.createPersistent(path);
     }
 
-    public String buildPath(@NotNull String path, @NotNull String ip, @NotNull Integer rpcPort,
-            @NotNull Integer httpPort) {
-        StringBuilder node = new StringBuilder();
-        node.append(path).append("/");
-        node.append("-ip:").append(ip).append("rpcPort:").append(rpcPort).append("httpPort:").append(httpPort);
-        return node.toString();
-    }
-
-    public void createNode(String path) {
+    /**
+     * 创建临时节点 结束后自动删除
+     * 
+     * @param path zk node path
+     */
+    public void createTempNode(String path) {
         Assert.isTrue(!Strings.isNullOrEmpty(path), "path can't be null or empty");
         boolean exist = zkClient.exists(path);
         Assert.isTrue(!exist, "该节点已存在");
