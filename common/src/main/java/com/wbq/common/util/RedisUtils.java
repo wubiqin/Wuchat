@@ -27,7 +27,7 @@ public class RedisUtils {
         return flag;
     }
 
-    public boolean setWithExpire(String key, String val, int seconds) {
+    public boolean setex(String key, String val, int seconds) {
         Jedis jedis = getResource();
         boolean flag = jedis.setex(key, seconds, val) != null;
         close(jedis);

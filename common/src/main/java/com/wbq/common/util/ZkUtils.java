@@ -60,11 +60,9 @@ public class ZkUtils {
         return childrenList;
     }
 
-    public void subscribeEvent(String path) {
-        zkClient.subscribeChildChanges(path, ((parentPath, currentChilds) -> {
-            log.info("子节点变化 更新缓存 path={},childs={}", path, currentChilds);
-            cache.update(currentChilds);
-        }));
+    public List<String> subscribeEvent(String path) {
+        return zkClient.subscribeChildChanges(path,
+                ((parentPath, currentChilds) -> log.info("子节点更新  path={},childs={}", path, currentChilds)));
     }
 
     public boolean deleteNode(String path) {
