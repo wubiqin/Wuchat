@@ -25,10 +25,6 @@ public class BeanUtils implements ApplicationContextAware {
         return applicationContext.getBean(name, clz);
     }
 
-    public static <T> T getBean(String name) {
-        return (T) applicationContext.getBean(name);
-    }
-
     public static <T> T getBean(Class<T> clz) {
         return applicationContext.getBean(clz);
     }
