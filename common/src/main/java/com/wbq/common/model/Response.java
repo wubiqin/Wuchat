@@ -1,5 +1,6 @@
 package com.wbq.common.model;
 
+import com.wbq.common.constant.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response<T> {
+    public static final Response success = Response.builder().code(Constant.SUCCESS).build();
     private int code;
 
     private String msg;
