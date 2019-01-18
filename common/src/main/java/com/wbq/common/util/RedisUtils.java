@@ -34,6 +34,14 @@ public class RedisUtils {
         return flag;
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> T get(String key) {
+        Jedis jedis = getResource();
+        T t = (T) jedis.get(key);
+        close(jedis);
+        return t;
+    }
+
     private Jedis getResource() {
         Jedis jedis = jedisPool.getResource();
         if (jedis == null) {

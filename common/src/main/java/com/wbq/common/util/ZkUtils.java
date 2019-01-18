@@ -39,8 +39,8 @@ public class ZkUtils {
     }
 
     /**
-     * 创建临时节点 结束后自动删除
-     * 
+     * 创建临时节点 过期后自动删除
+     *
      * @param path zk node path
      */
     public void createTempNode(String path) {
