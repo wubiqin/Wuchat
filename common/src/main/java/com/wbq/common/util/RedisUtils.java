@@ -48,6 +48,11 @@ public class RedisUtils {
         return val;
     }
 
+    public void del(String key) {
+        Jedis jedis = getResource();
+        jedis.del(key);
+    }
+
     private Jedis getResource() {
         Jedis jedis = jedisPool.getResource();
         if (jedis == null) {
@@ -61,5 +66,6 @@ public class RedisUtils {
         log.info("return connection to pool");
         jedis.close();
     }
+
 
 }

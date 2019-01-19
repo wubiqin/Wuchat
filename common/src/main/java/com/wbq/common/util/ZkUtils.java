@@ -2,6 +2,7 @@ package com.wbq.common.util;
 
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -66,6 +67,11 @@ public class ZkUtils {
     public List<String> subscribeEvent(String path) {
         return zkClient.subscribeChildChanges(path,
                 ((parentPath, currentChilds) -> log.info("子节点更新  path={},childs={}", path, currentChilds)));
+    }
+
+    public void unsubscribeChildChanges(String path) {
+        zkClient.unsubscribeChildChanges(path, (parentPath, currentChilds) ->
+                log.info("do nothing"));
     }
 
     public boolean deleteNode(String path) {

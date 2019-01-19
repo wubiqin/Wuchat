@@ -51,11 +51,16 @@ public class RouteService {
         assert user.getUserName() != null;
 
         //todo 后期通过token校验
-        //验证是否在线
-        if (redisUtils.get(Constant.ONLINE + user.getUserName()) == null) {
-            throw new UnsupportedOperationException("you are off lined");
-        }
         return zkUtils.getChildren(SLASH + user.getUserName());
+    }
+
+    public void addFriend(User user, List<String> accounts) {
+        assert user != null;
+        assert user.getUserName() != null;
+        assert !accounts.isEmpty();
+
+        accounts.forEach(account -> zkUtils.createRootNode(String.format("/%s/%s", user
+                .getUserName(), account)));
     }
 
     public void sendMsg(User from, List<String> toList, String msg) {
@@ -65,7 +70,7 @@ public class RouteService {
 
         List<String> ipList = toList.stream().map(it -> redisUtils.get(Constant.ONLINE + it)).collect(Collectors.toList());
 
-        //todo 后期通过 消息队列异步形式发送消息
+        //todo 后期通过消息队列异步形式发送消息
         ThreadPoolUtil.execute(() -> ipList.forEach(it -> {
             //发送消息 http
 
