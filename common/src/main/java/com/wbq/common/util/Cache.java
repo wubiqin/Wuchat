@@ -3,7 +3,6 @@ package com.wbq.common.util;
 import com.google.common.base.Splitter;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.wbq.common.config.AppConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.stereotype.Component;
@@ -27,23 +26,20 @@ public class Cache {
     private static final Splitter splitter = Splitter.on("-");
 
     @Resource
-    private LoadingCache<String, String> cache;
+    private LoadingCache<String, String> loadingCache;
 
     @Resource
     private ZkClient zkClient;
 
-    @Resource
-    private AppConfig config;
-
     public void add(String key) {
-        cache.put(key, key);
+        loadingCache.put(key, key);
     }
 
     public void update(List<String> childrenList) {
         if (CollectionUtils.isEmpty(childrenList)) {
             return;
         }
-        cache.invalidateAll();
+        loadingCache.invalidateAll();
         updateCache(childrenList);
     }
 
@@ -58,13 +54,13 @@ public class Cache {
         });
     }
 
-    public List<String> getAll() {
-        if (cache.size() > 0) {
+    public List<String> getAll(String path) {
+        if (loadingCache.size() > 0) {
             log.info("get server from cache");
-            return new ArrayList<>(cache.asMap().keySet());
+            return new ArrayList<>(loadingCache.asMap().keySet());
         }
 
-        List<String> childrenList = zkClient.getChildren(config.getPath());
+        List<String> childrenList = zkClient.getChildren(String.format("/%s", path));
         if (CollectionUtils.isEmpty(childrenList)) {
             return Collections.emptyList();
         }

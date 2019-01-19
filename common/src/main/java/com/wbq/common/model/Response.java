@@ -17,7 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response<T> {
-    public static final Response success = Response.builder().code(Constant.SUCCESS).build();
+    public static final Response SUCCESS = Response.builder().code(Constant.SUCCESS).build();
+
+    public static final Response FAIL = Response.builder().code(Constant.FAIL).build();
+
     private int code;
 
     private String msg;

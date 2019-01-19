@@ -1,5 +1,6 @@
 package com.wbq.common.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
+@Builder
 public class User {
 
     private String userName;

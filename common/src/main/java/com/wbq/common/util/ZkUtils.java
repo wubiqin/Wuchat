@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author: biqin.wu
@@ -20,6 +21,8 @@ import java.util.List;
 @Slf4j
 @Component
 public class ZkUtils {
+
+    private static final Pattern PATTERN = Pattern.compile("");
 
     @Resource
     private ZkClient zkClient;

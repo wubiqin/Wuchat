@@ -27,6 +27,13 @@ public class RedisUtils {
         return flag;
     }
 
+    public boolean setnx(String key, String val) {
+        Jedis jedis = getResource();
+        long result = jedis.setnx(key, val);
+        close(jedis);
+        return result == 1;
+    }
+
     public boolean setex(String key, String val, int seconds) {
         Jedis jedis = getResource();
         boolean flag = jedis.setex(key, seconds, val) != null;
@@ -34,12 +41,11 @@ public class RedisUtils {
         return flag;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T get(String key) {
+    public String get(String key) {
         Jedis jedis = getResource();
-        T t = (T) jedis.get(key);
+        String val = jedis.get(key);
         close(jedis);
-        return t;
+        return val;
     }
 
     private Jedis getResource() {

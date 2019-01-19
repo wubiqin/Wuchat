@@ -1,5 +1,8 @@
 package com.wbq.common.config;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +32,16 @@ public class BeanConfig {
     public JedisPool jedisConnectionFactory() {
         return new JedisPool(jedisPoolConfig(), appConfig.getRedisAddress(), appConfig.getRedisPort(),
                 appConfig.getRedisTimeout());
+    }
+
+    @Bean
+    public <T, R> LoadingCache<T, R> loadingCache() {
+        return CacheBuilder.newBuilder().build(new CacheLoader<T, R>() {
+            @Override
+            public R load(T t) throws Exception {
+                return null;
+            }
+        });
     }
 
     @Bean

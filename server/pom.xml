@@ -11,5 +11,13 @@
 
     <artifactId>server</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.wbq</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

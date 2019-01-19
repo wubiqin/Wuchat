@@ -1,6 +1,5 @@
 package com.wbq.common.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -11,7 +10,6 @@ import org.springframework.context.ApplicationContextAware;
  * @Time: 15:36
  * @Description:
  */
-@Slf4j
 public class BeanUtils implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;

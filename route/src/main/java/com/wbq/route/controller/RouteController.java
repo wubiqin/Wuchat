@@ -2,10 +2,7 @@ package com.wbq.route.controller;
 
 import com.wbq.common.model.Response;
 import com.wbq.common.model.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,13 +15,27 @@ public class RouteController {
 
     // 注册
     @PostMapping("/register")
-    public Response register(@RequestBody User user, HttpServletRequest request) {
+    public Response register(@RequestBody User user) {
         return null;
     }
 
     // 上线
+    @PostMapping("/online")
+    public Response online(@RequestBody User user, HttpServletRequest request) {
+        return null;
+    }
 
     // 下线
+    @GetMapping("/offline")
+    public Response offline(@RequestBody User user) {
+        return null;
+    }
 
     // chat
+    @GetMapping("/")
+    public Response sendMsg(String user, String msg) {
+        assert msg != null;
+        return null;
+    }
+
 }

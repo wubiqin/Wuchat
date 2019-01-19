@@ -20,13 +20,16 @@ public class AppConfig {
     @Value("${chat.zk.timeout}")
     private Integer timeout;
 
+    @Value("${chat.redis.address}")
     private String redisAddress;
 
+    @Value("${chat.redis.port}")
     private Integer redisPort;
 
     private Integer redisMaxTotal;
 
     private Integer redisMaxIdle;
 
+    @Value("${chat.redis.timeout}")
     private Integer redisTimeout;
 }
