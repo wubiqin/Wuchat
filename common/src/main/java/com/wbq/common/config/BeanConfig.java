@@ -3,6 +3,7 @@ package com.wbq.common.config;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import okhttp3.OkHttpClient;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: biqin.wu
@@ -42,6 +44,15 @@ public class BeanConfig {
                 return null;
             }
         });
+    }
+
+    @Bean
+    public OkHttpClient okHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        return builder.connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(3, TimeUnit.SECONDS)
+                .writeTimeout(3, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true).build();
     }
 
     @Bean

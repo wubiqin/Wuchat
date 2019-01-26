@@ -3,6 +3,7 @@ package com.wbq.route.service;
 import com.google.common.base.Strings;
 import com.wbq.common.constant.Constant;
 import com.wbq.common.model.User;
+import com.wbq.common.util.HttpUtils;
 import com.wbq.common.util.RedisUtils;
 import com.wbq.common.util.ThreadPoolUtil;
 import com.wbq.common.util.ZkUtils;
@@ -28,6 +29,9 @@ public class RouteService {
 
     @Resource
     private RedisUtils redisUtils;
+
+    @Resource
+    private HttpUtils httpUtils;
 
     public boolean register(User user) {
         assert user != null;
@@ -73,10 +77,10 @@ public class RouteService {
         //todo 后期通过消息队列异步形式发送消息
         ThreadPoolUtil.execute(() -> ipList.forEach(it -> {
             //发送消息 http
-
-
+            httpUtils.sendMsg(it, msg);
             //rpc
         }));
+        //保存消息记录
     }
 
 
