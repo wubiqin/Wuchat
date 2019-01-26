@@ -77,8 +77,8 @@ public class RouteService {
         //todo 后期通过消息队列异步形式发送消息
         ThreadPoolUtil.execute(() -> ipList.forEach(it -> {
             //发送消息 http
-            httpUtils.sendMsg(it, msg);
-            //rpc
+            httpUtils.sendMsg(String.format("http://%s/sendMsg", it), msg);
+            //rpc grpc netty
         }));
         //保存消息记录
     }

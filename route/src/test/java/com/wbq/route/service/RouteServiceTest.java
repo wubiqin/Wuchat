@@ -1,5 +1,6 @@
 package com.wbq.route.service;
 
+import com.wbq.common.constant.Constant;
 import com.wbq.common.model.User;
 import com.wbq.common.util.RedisUtils;
 import com.wbq.common.util.ZkUtils;
@@ -67,6 +68,10 @@ public class RouteServiceTest {
 
     @Test
     public void sendMsg() {
+        List<String> toList = Lists.newArrayList("xiaoming,xiaohong");
+        redisUtils.setex(Constant.ONLINE + "xiaoming", "127.0.0.1:8080", 300);
+        redisUtils.setex(Constant.ONLINE + "xiaohong", "127.0.0.1:8081", 300);
+        service.sendMsg(user, toList, "hello world");
     }
 
     @Test
