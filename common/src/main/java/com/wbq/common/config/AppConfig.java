@@ -32,4 +32,24 @@ public class AppConfig {
 
     @Value("${chat.redis.timeout}")
     private Integer redisTimeout;
+
+    @Value("${chat.mq.directExchange}")
+    private String directExchange;
+
+    @Value("${chat.mq.directQueue}")
+    private String directQueue;
+
+    @Value("${chat.mq.fanoutExchange}")
+    private String fanoutExchange;
+
+    @Value("${chat.mq.fanoutQueue1}")
+    private String fanoutQueue1;
+
+    @Value("${chat.mq.fanoutQueue2}")
+    private String fanoutQueue2;
+
+    @Value("${chat.mq.directRoutingKey}")
+    private String directRoutingKey;
+
+
 }
